@@ -18,5 +18,12 @@ module Rorlee
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.middleware.insert_before 0, Rack::Rewrite do
+      r301 %r{.*}, proc { |path, rack_env| "https://rorlee.com#{path}" }, :if => Proc.new { |rack_env|
+        rack_env['SERVER_NAME'] != 'rorlee.com'
+      }
+    end
+    
   end
 end
