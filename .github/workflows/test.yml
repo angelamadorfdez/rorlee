@@ -8,9 +8,18 @@ jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rorlee-test
+          POSTGRES_USER: rorlee
+          POSTGRES_PASSWORD: admin1234
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:q3qGhNdrDlL5baS@localhost:5432/rorlee-db"
+      DATABASE_URL: "postgres://rorlee:admin1234@localhost:5432/rorlee-test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
