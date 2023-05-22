@@ -3,31 +3,22 @@ version: 2.1
 jobs:
   test:
     parallelism: 2
+    docker:
+      - image: circleci/ruby:2.7.4-node-browsers
     steps:
       - checkout
       - attach_workspace:
           at: ~/rorlee
-      # - run: bundle --path vendor/bundle
       - run: yarn install
-      
-      # Wait for DB containers to be ready
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      
-      # Copy database config
       - run: cp config/database.yml.example config/database.yml
-
-      # Setup the environment
       - run: cp .env.example .env
-
-      # Setup the database
-      - run: bin/rails db:create db:migrate
-
-      # Run tests
+      - run: bundle exec rails db:create db:migrate
       - run:
           name: Run tests
           command: |
-            TEST_FILES="$(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)"
-            bin/rails test $TEST_FILES
+            TEST_FILES=$(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
+            bundle exec rails test $TEST_FILES
 
 workflows:
   version: 2
