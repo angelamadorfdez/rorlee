@@ -30,7 +30,7 @@ jobs:
           bundler-cache: true
       # Run migrations and create schema.rb file
       - name: Migrate DDBB
-        uses: bin/rails db:migrate
+        run: bin/rails db:migrate
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
