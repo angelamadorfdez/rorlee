@@ -1,4 +1,4 @@
-name: Testing
+name: CD/CI Testing
 on:
   push:
     branches: [main]
@@ -30,11 +30,11 @@ jobs:
         with:
           bundler-cache: true
       # Run migrations and create schema.rb file
-      # - name: Migrate DDBB
-      #   run: bin/rails db:migrate
+      - name: Migrate DDBB
+        run: bin/rails db:migrate
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
-      - name: Run tests
+      - name: Rails test
         run: bundle exec rails test
