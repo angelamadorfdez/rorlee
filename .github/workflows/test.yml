@@ -8,18 +8,19 @@ jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
+    # Create Postgres instance
     services:
       postgres:
         image: postgres:11-alpine
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: rorlee-test
-          POSTGRES_USER: rorlee
-          POSTGRES_PASSWORD: admin1234
+          POSTGRES_DB: rails-test
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rorlee:admin1234@localhost:5432/rorlee-test"
+      DATABASE_URL: "postgres://user:password@localhost:5432/rails-test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,8 +30,8 @@ jobs:
         with:
           bundler-cache: true
       # Run migrations and create schema.rb file
-      - name: Migrate DDBB
-        run: bin/rails db:migrate
+      # - name: Migrate DDBB
+      #   run: bin/rails db:migrate
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
