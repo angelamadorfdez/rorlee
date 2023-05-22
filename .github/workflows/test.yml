@@ -19,7 +19,7 @@ jobs:
           POSTGRES_PASSWORD: q3qGhNdrDlL5baS
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:q3qGhNdrDlL5baS@localhost:5432/rails_test"
+      DATABASE_URL: "postgres://postgres:q3qGhNdrDlL5baS@localhost:5432/rorlee-db"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
