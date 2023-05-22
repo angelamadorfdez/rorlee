@@ -1,0 +1,33 @@
+name: Deploy to Fly.io (production)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.FLYIO_USERNAME }}
+          password: ${{ secrets.FLYIO_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+
+      - name: Deploy to fly.io
+        run: flyctl deploy
