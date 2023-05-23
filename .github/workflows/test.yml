@@ -35,6 +35,9 @@ jobs:
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
+      # Precompilar assets (tailwind + DaisyUI)
+      - name: Precompile assets
+        run: bundle exec rake assets:precompile
       # Add or replace test runners here
       - name: Rails test
         run: bundle exec rails test
