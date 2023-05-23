@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WelcomeControllerTest < ActionDispatch::IntegrationTest
+class VisitHomeTest < ActionDispatch::IntegrationTest
   
   def test_visit_homepage
     get root_path
