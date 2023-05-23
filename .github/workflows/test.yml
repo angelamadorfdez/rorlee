@@ -1,4 +1,4 @@
-name: CD/CI Testing
+name: PR Check
 on:
   # push:
   #   branches: [main]
