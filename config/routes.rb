@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   
   root 'welcome#index'
   
+  namespace :authentication do
+    resources :users, only: [:new, :create]
+  end
+
 end

@@ -1,0 +1,9 @@
+angel:
+  email: angel@rorlee.com
+  username: angel_af
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
+
+sergio:
+  email: sergio@rorlee.com
+  username: sergio_ch
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
