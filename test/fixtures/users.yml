@@ -1,0 +1,9 @@
+angel:
+  email: angel@rorlee.com
+  username: angel_af
+  password_digest: MyString
+
+sergio:
+  email: sergio@rorlee.com
+  username: sergio_ch
+  password_digest: MyString
