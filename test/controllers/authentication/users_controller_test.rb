@@ -11,6 +11,8 @@ class Authentication::UserControllerTest < ActionDispatch::IntegrationTest
     assert_difference('User.count') do    
       post authentication_users_url, params: { user: { email: 'jose@ingenio.xyz', username: 'jose97', password: 'testme' } }
     end
+
+    assert_redirected_to root_url
   end
 
 end
